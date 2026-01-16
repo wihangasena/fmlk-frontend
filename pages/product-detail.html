@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - FMLK</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Notice -->
+    <div class="header-notice">
+        Worldwide Delivery & Pickup From Store Options Available
+    </div>
+
+    <!-- Sticky Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="nav-center">
+                <a href="../index.html" class="logo">
+                    <img src="https://fmlk.lk/cdn/shop/files/262CF083-1F8B-41AB-A174-2A775BFEB365_300x.png?v=1614309120" alt="FMLK" class="logo-img">
+                </a>
+            </div>
+            <div class="nav-right">
+                <a href="#" class="nav-icon" aria-label="Search"><i class="fas fa-search"></i></a>
+                <a href="wishlist.html" class="nav-icon wishlist-icon" aria-label="Wishlist">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-count" id="wishlistCount">0</span>
+                </a>
+                <a href="login.html" class="nav-icon" aria-label="Login"><i class="fas fa-user"></i></a>
+                <a href="cart.html" class="nav-icon" aria-label="Cart"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </div>
+        <div class="nav-menu" id="navMenu">
+            <a href="../index.html">HOME</a>
+            <a href="sarees.html">SAREES</a>
+            <a href="dresses.html">DRESSES</a>
+            <a href="tops.html">TOPS</a>
+            <a href="about.html">ABOUT US</a>
+            <a href="contact.html">CONTACT US</a>
+        </div>
+    </nav>
+
+    <!-- Back to Category Navigation -->
+    <div class="breadcrumb-nav">
+        <div class="container">
+            <a href="dresses.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Dresses
+            </a>
+        </div>
+    </div>
+
+    <!-- Product Detail Section -->
+    <section class="product-detail">
+        <div class="product-detail-grid">
+            <!-- Left Side: Product Images -->
+            <div class="product-images">
+                <div class="product-main-image">
+                    <img id="mainImage" src="https://fmlk.lk/cdn/shop/products/1_077ea745-4b1d-402f-9548-0e97a28c73ed_720x.jpg?v=1630642213" alt="Queen Of Heart Dress">
+                </div>
+                <div class="product-thumbnails">
+                    <img class="thumbnail active" src="https://fmlk.lk/cdn/shop/products/1_077ea745-4b1d-402f-9548-0e97a28c73ed_720x.jpg?v=1630642213" alt="Thumbnail 1" onclick="changeImage(this)">
+                    <img class="thumbnail" src="https://fmlk.lk/cdn/shop/files/grey_wrap_dress_720x.jpg?v=1753764520" alt="Thumbnail 2" onclick="changeImage(this)">
+                    <img class="thumbnail" src="https://fmlk.lk/cdn/shop/products/1_077ea745-4b1d-402f-9548-0e97a28c73ed_720x.jpg?v=1630642213" alt="Thumbnail 3" onclick="changeImage(this)">
+                </div>
+            </div>
+
+            <!-- Right Side: Product Info -->
+            <div class="product-detail-info">
+                <h1 class="product-name">Queen Of Heart Dress</h1>
+                
+                <div class="product-price-section">
+                    <div class="product-detail-price">12,760 LKR</div>
+                    <span class="tax-note">Tax included</span>
+                </div>
+
+                <div class="installment-info">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Pay in 3 interest-free installments of 4,253 LKR with <strong>Koko</strong></span>
+                </div>
+
+                <!-- Size Selection -->
+                <div class="product-options">
+                    <label>Size:</label>
+                    <div class="size-selector">
+                        <button class="size-option" data-size="XS">XS</button>
+                        <button class="size-option" data-size="S">S</button>
+                        <button class="size-option selected" data-size="M">M</button>
+                        <button class="size-option" data-size="L">L</button>
+                        <button class="size-option" data-size="XL">XL</button>
+                    </div>
+                    <a href="size-guide.html" class="size-guide-link">
+                        <i class="fas fa-ruler"></i> Size Guide
+                    </a>
+                </div>
+
+                <!-- Quantity Selection -->
+                <div class="product-options">
+                    <label for="quantity">Quantity:</label>
+                    <div class="quantity-selector">
+                        <button class="qty-btn" onclick="changeQuantity(-1)" aria-label="Decrease quantity" title="Decrease quantity">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <input type="number" id="quantity" value="1" min="1" max="10" readonly aria-label="Quantity" title="Quantity">
+                        <button class="qty-btn" onclick="changeQuantity(1)" aria-label="Increase quantity" title="Increase quantity">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="product-actions">
+                    <button class="btn-add-to-cart" onclick="addToCart()">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                    <button class="btn-buy-now" onclick="buyNow()">
+                        Buy Now
+                    </button>
+                </div>
+
+                <!-- Wishlist Button -->
+                <div class="wishlist-action">
+                    <button class="btn-wishlist" id="wishlistBtn" onclick="toggleWishlist()">
+                        <i class="far fa-heart" id="wishlistIcon"></i>
+                        <span id="wishlistText">Add to Wishlist</span>
+                    </button>
+                </div>
+
+                <!-- Product Description -->
+                <div class="product-description-section">
+                    <h3>Description</h3>
+                    <p>Embrace elegance with this stunning Queen Of Heart Dress. Crafted with premium soft fabric, this piece features a flattering wrap design with a beautiful red pattern. The comfortable yet stylish silhouette makes it perfect for casual outings or special occasions.</p>
+                    <p>Handcrafted with attention to detail, this dress showcases traditional batik artistry blended with modern fashion sensibilities.</p>
+                </div>
+
+                <!-- Product Details Table -->
+                <div class="product-details-table">
+                    <h3>Product Details</h3>
+                    <table>
+                        <tr>
+                            <td>Style Number</td>
+                            <td>QOH-2024-001</td>
+                        </tr>
+                        <tr>
+                            <td>Brand</td>
+                            <td>FMLK</td>
+                        </tr>
+                        <tr>
+                            <td>Fabric Composition</td>
+                            <td>100% Cotton</td>
+                        </tr>
+                        <tr>
+                            <td>Wash & Care</td>
+                            <td>Hand wash cold, do not bleach, iron on low heat</td>
+                        </tr>
+                        <tr>
+                            <td>Product Code</td>
+                            <td>SKU-QOH001</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Model Information -->
+                <div class="model-info">
+                    <h3>Model Information</h3>
+                    <p>Model is wearing size <strong>M</strong></p>
+                    <ul>
+                        <li><span>Height:</span> 5'7" / 170cm</li>
+                        <li><span>Bust:</span> 34"</li>
+                        <li><span>Waist:</span> 26"</li>
+                        <li><span>Hip:</span> 36"</li>
+                    </ul>
+                </div>
+
+                <!-- Social Sharing -->
+                <div class="social-share">
+                    <span>Share:</span>
+                    <div class="share-icons">
+                        <a href="#" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Share on Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="Share via Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="https://fmlk.lk/cdn/shop/files/262CF083-1F8B-41AB-A174-2A775BFEB365_300x.png?v=1614309120" alt="FMLK" class="footer-logo-img">
+                    </div>
+                    <p class="footer-desc">Discover the finest Sri Lankan fashion with FMLK. Quality craftsmanship meets modern style.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/fashionmarketlk" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/fashionmarketlk" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UCvLt74yueq1sP-_s1qKkTMQ" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" target="_blank" title="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="store.html">Our Store</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="sarees.html">Sarees</a></li>
+                        <li><a href="dresses.html">Dresses</a></li>
+                        <li><a href="tops.html">Tops</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Help</h4>
+                    <ul class="footer-links">
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="delivery.html">Delivery Policy</a></li>
+                        <li><a href="returns.html">Returns & Exchange</a></li>
+                        <li><a href="terms.html">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get special offers and updates.</p>
+                    <form class="newsletter-form">
+                        <div class="newsletter-input">
+                            <input type="email" placeholder="Enter your email" required>
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 FMLK. All Rights Reserved.</p>
+                <div class="payment-icons">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../scripts/api.js"></script>
+    <script src="../scripts/main.js"></script>
+    <script>
+        // Current product data
+        let currentProduct = null;
+
+        // Get product ID from URL
+        function getProductIdFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        // Load product details from API
+        async function loadProductDetails() {
+            const productId = getProductIdFromURL();
+            
+            if (!productId) {
+                console.error('No product ID found in URL');
+                showErrorMessage('Product not found. Please go back and try again.');
+                return;
+            }
+
+            try {
+                const response = await getProduct(productId);
+                
+                if (response.success && response.data) {
+                    currentProduct = response.data;
+                    displayProduct(currentProduct);
+                } else {
+                    showErrorMessage('Product not found.');
+                }
+            } catch (error) {
+                console.error('Error loading product:', error);
+                showErrorMessage('Error loading product. Make sure the backend server is running.');
+            }
+        }
+
+        // Display product on page
+        function displayProduct(product) {
+            // Update page title
+            document.title = `${product.name} - FMLK`;
+            
+            // Update main image
+            const mainImage = document.getElementById('mainImage');
+            if (product.images && product.images.length > 0) {
+                mainImage.src = product.images[0];
+                mainImage.alt = product.name;
+            }
+            
+            // Update thumbnails
+            const thumbnailContainer = document.querySelector('.product-thumbnails');
+            if (product.images && product.images.length > 0) {
+                thumbnailContainer.innerHTML = product.images.map((img, index) => `
+                    <img class="thumbnail ${index === 0 ? 'active' : ''}" 
+                         src="${img}" 
+                         alt="Thumbnail ${index + 1}" 
+                         onclick="changeImage(this)">
+                `).join('');
+            }
+            
+            // Update product name
+            document.querySelector('.product-name').textContent = product.name;
+            
+            // Update price
+            document.querySelector('.product-detail-price').textContent = `${product.price.toLocaleString()} LKR`;
+            
+            // Update installment info
+            const installmentAmount = Math.ceil(product.price / 3).toLocaleString();
+            document.querySelector('.installment-info span').innerHTML = 
+                `Pay in 3 interest-free installments of ${installmentAmount} LKR with <strong>Koko</strong>`;
+            
+            // Update sizes
+            const sizeSelector = document.querySelector('.size-selector');
+            if (product.sizes && product.sizes.length > 0) {
+                sizeSelector.innerHTML = product.sizes.map((size, index) => `
+                    <button class="size-option ${index === 0 ? 'selected' : ''}" data-size="${size}">${size}</button>
+                `).join('');
+                
+                // Re-attach size selection event listeners
+                document.querySelectorAll('.size-option').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        document.querySelectorAll('.size-option').forEach(b => b.classList.remove('selected'));
+                        this.classList.add('selected');
+                    });
+                });
+            }
+            
+            // Update description
+            const descriptionSection = document.querySelector('.product-description-section');
+            if (product.description) {
+                descriptionSection.innerHTML = `
+                    <h3>Description</h3>
+                    <p>${product.description}</p>
+                `;
+            }
+            
+            // Update product details table
+            const detailsTable = document.querySelector('.product-details-table table');
+            detailsTable.innerHTML = `
+                <tr><td>Style Number</td><td>${product.styleNumber || product._id}</td></tr>
+                <tr><td>Brand</td><td>${product.brand || 'FMLK'}</td></tr>
+                <tr><td>Category</td><td>${product.category ? product.category.charAt(0).toUpperCase() + product.category.slice(1) : 'N/A'}</td></tr>
+                <tr><td>Fabric Composition</td><td>${product.fabricComposition || product.material || 'Premium Quality Fabric'}</td></tr>
+                <tr><td>Wash & Care</td><td>${product.washCare || 'Hand wash cold, do not bleach, iron on low heat'}</td></tr>
+                <tr><td>Product Code</td><td>${product.sku || product._id}</td></tr>
+            `;
+            
+            // Update breadcrumb/back link based on category
+            const backLink = document.querySelector('.back-link');
+            if (product.category) {
+                backLink.href = `${product.category}.html`;
+                backLink.innerHTML = `<i class="fas fa-arrow-left"></i> Back to ${product.category.charAt(0).toUpperCase() + product.category.slice(1)}`;
+            }
+            
+            // Check wishlist status
+            checkWishlistStatus();
+        }
+
+        // Show error message
+        function showErrorMessage(message) {
+            const productDetail = document.querySelector('.product-detail');
+            productDetail.innerHTML = `
+                <div style="text-align: center; padding: 60px 20px;">
+                    <i class="fas fa-exclamation-circle" style="font-size: 48px; color: #ccc; margin-bottom: 20px;"></i>
+                    <h2 style="margin-bottom: 15px;">Oops!</h2>
+                    <p style="color: #666; margin-bottom: 20px;">${message}</p>
+                    <a href="../index.html" class="btn-add-to-cart" style="display: inline-block; text-decoration: none;">
+                        <i class="fas fa-home"></i> Go to Homepage
+                    </a>
+                </div>
+            `;
+        }
+
+        // Image Gallery
+        function changeImage(thumbnail) {
+            document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+            thumbnail.classList.add('active');
+            document.getElementById('mainImage').src = thumbnail.src;
+        }
+
+        // Size Selection (initial setup)
+        document.querySelectorAll('.size-option').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.size-option').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // Quantity Control
+        function changeQuantity(delta) {
+            const input = document.getElementById('quantity');
+            let value = parseInt(input.value) + delta;
+            if (value >= 1 && value <= 10) {
+                input.value = value;
+            }
+        }
+
+        // Add to Cart
+        function addToCart() {
+            if (!currentProduct) return;
+            
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const size = document.querySelector('.size-option.selected')?.dataset.size || 'M';
+            
+            // Use localStorage for cart
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Check if product with same size already exists in cart
+            const existingIndex = cart.findIndex(item => 
+                item.productId === currentProduct._id && item.size === size
+            );
+            
+            if (existingIndex > -1) {
+                // Update quantity
+                cart[existingIndex].quantity += quantity;
+            } else {
+                // Add new item
+                cart.push({
+                    productId: currentProduct._id,
+                    name: currentProduct.name,
+                    price: currentProduct.price,
+                    quantity: quantity,
+                    size: size,
+                    image: currentProduct.images ? currentProduct.images[0] : ''
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Show nice notification
+            showNotification(`Added ${quantity} × "${currentProduct.name}" (Size: ${size}) to cart!`);
+        }
+
+        // Buy Now - Go directly to checkout
+        function buyNow() {
+            if (!currentProduct) return;
+            
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const size = document.querySelector('.size-option.selected')?.dataset.size || 'M';
+            
+            // Set cart with just this item for immediate checkout
+            const cart = [{
+                productId: currentProduct._id,
+                name: currentProduct.name,
+                price: currentProduct.price,
+                quantity: quantity,
+                size: size,
+                image: currentProduct.images ? currentProduct.images[0] : ''
+            }];
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            window.location.href = 'checkout.html';
+        }
+
+        // Show notification
+        function showNotification(message) {
+            // Remove existing notifications
+            const existing = document.querySelector('.notification');
+            if (existing) existing.remove();
+            
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <span>${message}</span>
+                <a href="cart.html" style="color: white; margin-left: 10px; text-decoration: underline;">View Cart</a>
+            `;
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                padding: 15px 25px;
+                background: #22c55e;
+                color: white;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                z-index: 9999;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+                animation: slideIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 4000);
+        }
+
+        // Wishlist Toggle
+        function toggleWishlist() {
+            if (!currentProduct) return;
+            
+            const btn = document.getElementById('wishlistBtn');
+            const icon = document.getElementById('wishlistIcon');
+            const text = document.getElementById('wishlistText');
+            
+            btn.classList.toggle('active');
+            
+            if (btn.classList.contains('active')) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                text.textContent = 'Added to Wishlist';
+                saveToWishlist();
+            } else {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                text.textContent = 'Add to Wishlist';
+                removeFromWishlistItem();
+            }
+        }
+
+        // Save to Wishlist
+        function saveToWishlist() {
+            if (!currentProduct) return;
+            
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            if (!wishlist.includes(currentProduct._id)) {
+                wishlist.push(currentProduct._id);
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            }
+            updateWishlistCount();
+        }
+
+        // Remove from Wishlist
+        function removeFromWishlistItem() {
+            if (!currentProduct) return;
+            
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            wishlist = wishlist.filter(id => id !== currentProduct._id);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            updateWishlistCount();
+        }
+
+        // Update Wishlist Count in Header
+        function updateWishlistCount() {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const countBadge = document.getElementById('wishlistCount');
+            if (countBadge) {
+                countBadge.textContent = wishlist.length;
+                countBadge.style.display = wishlist.length > 0 ? 'flex' : 'none';
+            }
+        }
+
+        // Check if product is in wishlist on page load
+        function checkWishlistStatus() {
+            if (!currentProduct) return;
+            
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const isInWishlist = wishlist.includes(currentProduct._id);
+            
+            if (isInWishlist) {
+                const btn = document.getElementById('wishlistBtn');
+                const icon = document.getElementById('wishlistIcon');
+                const text = document.getElementById('wishlistText');
+                if (btn && icon && text) {
+                    btn.classList.add('active');
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    text.textContent = 'Added to Wishlist';
+                }
+            }
+            updateWishlistCount();
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProductDetails();
+            updateWishlistCount();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - FMLK</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .account-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 60vh;
+        }
+
+        .account-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .account-header h1 {
+            font-size: 32px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .account-header p {
+            color: var(--text-light);
+            font-size: 16px;
+        }
+
+        .account-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+        }
+
+        /* Sidebar */
+        .account-sidebar {
+            background: var(--secondary-color);
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            height: fit-content;
+        }
+
+        .user-profile {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 32px;
+            color: white;
+        }
+
+        .user-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .user-email {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .account-nav {
+            list-style: none;
+        }
+
+        .account-nav li {
+            margin-bottom: 5px;
+        }
+
+        .account-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .account-nav a:hover,
+        .account-nav a.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .account-nav i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            color: #dc3545;
+            background: none;
+            border: 1px solid #dc3545;
+            width: 100%;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        /* Main Content */
+        .account-content {
+            background: var(--secondary-color);
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        /* Dashboard Cards */
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .dash-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            padding: 25px;
+            color: white;
+            text-align: center;
+        }
+
+        .dash-card i {
+            font-size: 32px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .dash-card h3 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .dash-card p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Orders Table */
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .orders-table th,
+        .orders-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .orders-table th {
+            background: var(--bg-light);
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .order-status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-processing {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .status-shipped {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-delivered {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        /* Profile Form */
+        .profile-form {
+            max-width: 600px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-state i {
+            font-size: 64px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            font-size: 20px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .btn-shop {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-shop:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .account-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .orders-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-notice">
+        Worldwide Delivery & Pickup From Store Options Available
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="nav-center">
+                <a href="../index.html" class="logo">
+                    <img src="https://fmlk.lk/cdn/shop/files/262CF083-1F8B-41AB-A174-2A775BFEB365_300x.png?v=1614309120" alt="FMLK" class="logo-img">
+                </a>
+            </div>
+            <div class="nav-right">
+                <a href="#" class="nav-icon" aria-label="Search"><i class="fas fa-search"></i></a>
+                <a href="account.html" class="nav-icon" aria-label="Account"><i class="fas fa-user"></i></a>
+                <a href="cart.html" class="nav-icon" aria-label="Cart"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </div>
+        <div class="nav-menu" id="navMenu">
+            <a href="../index.html">HOME</a>
+            <a href="sarees.html">SAREES</a>
+            <a href="dresses.html">DRESSES</a>
+            <a href="tops.html">TOPS</a>
+            <a href="about.html">ABOUT US</a>
+            <a href="contact.html">CONTACT US</a>
+        </div>
+    </nav>
+
+    <div class="account-container">
+        <div class="account-header">
+            <h1>My Account</h1>
+            <p>Manage your profile, orders and preferences</p>
+        </div>
+
+        <div class="account-grid">
+            <!-- Sidebar -->
+            <aside class="account-sidebar">
+                <div class="user-profile">
+                    <div class="user-avatar" id="userInitial">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="user-name" id="userName">Loading...</h3>
+                    <p class="user-email" id="userEmail">Loading...</p>
+                </div>
+
+                <ul class="account-nav">
+                    <li><a href="#dashboard" class="active" data-section="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#orders" data-section="orders"><i class="fas fa-shopping-bag"></i> My Orders</a></li>
+                    <li><a href="#wishlist" data-section="wishlist"><i class="fas fa-heart"></i> Wishlist</a></li>
+                    <li><a href="#profile" data-section="profile"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
+                    <li><a href="#addresses" data-section="addresses"><i class="fas fa-map-marker-alt"></i> Addresses</a></li>
+                </ul>
+
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="account-content">
+                <!-- Dashboard Section -->
+                <section id="dashboard" class="content-section active">
+                    <h2 class="section-title">Dashboard</h2>
+                    <div class="dashboard-cards">
+                        <div class="dash-card">
+                            <i class="fas fa-shopping-bag"></i>
+                            <h3 id="totalOrders">0</h3>
+                            <p>Total Orders</p>
+                        </div>
+                        <div class="dash-card">
+                            <i class="fas fa-heart"></i>
+                            <h3 id="wishlistCount">0</h3>
+                            <p>Wishlist Items</p>
+                        </div>
+                        <div class="dash-card">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h3 id="cartCount">0</h3>
+                            <p>Cart Items</p>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-bottom: 15px; color: var(--text-dark);">Recent Orders</h3>
+                    <div id="recentOrders">
+                        <div class="empty-state">
+                            <i class="fas fa-shopping-bag"></i>
+                            <h3>No orders yet</h3>
+                            <p>Start shopping to see your orders here</p>
+                            <a href="sarees.html" class="btn-shop">Start Shopping</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Orders Section -->
+                <section id="orders" class="content-section">
+                    <h2 class="section-title">My Orders</h2>
+                    <div id="allOrders">
+                        <div class="empty-state">
+                            <i class="fas fa-box-open"></i>
+                            <h3>No orders found</h3>
+                            <p>You haven't placed any orders yet</p>
+                            <a href="sarees.html" class="btn-shop">Start Shopping</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Wishlist Section -->
+                <section id="wishlist" class="content-section">
+                    <h2 class="section-title">My Wishlist</h2>
+                    <div id="wishlistItems">
+                        <div class="empty-state">
+                            <i class="fas fa-heart"></i>
+                            <h3>Your wishlist is empty</h3>
+                            <p>Save items you love for later</p>
+                            <a href="sarees.html" class="btn-shop">Explore Products</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Profile Section -->
+                <section id="profile" class="content-section">
+                    <h2 class="section-title">Edit Profile</h2>
+                    <form class="profile-form" id="profileForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="profileName">Full Name</label>
+                                <input type="text" id="profileName" placeholder="Enter your name">
+                            </div>
+                            <div class="form-group">
+                                <label for="profileEmail">Email Address</label>
+                                <input type="email" id="profileEmail" placeholder="Enter your email" readonly>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="profilePhone">Phone Number</label>
+                                <input type="tel" id="profilePhone" placeholder="Enter your phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="profileDob">Date of Birth</label>
+                                <input type="date" id="profileDob">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-save">Save Changes</button>
+                    </form>
+                </section>
+
+                <!-- Addresses Section -->
+                <section id="addresses" class="content-section">
+                    <h2 class="section-title">My Addresses</h2>
+                    <div class="empty-state">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>No addresses saved</h3>
+                        <p>Add an address for faster checkout</p>
+                        <button class="btn-shop" onclick="alert('Address feature coming soon!')">Add Address</button>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="https://fmlk.lk/cdn/shop/files/262CF083-1F8B-41AB-A174-2A775BFEB365_300x.png?v=1614309120" alt="FMLK" class="footer-logo-img">
+                    </div>
+                    <p class="footer-desc">Discover the finest Sri Lankan fashion with FMLK. Quality craftsmanship meets modern style.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/fashionmarketlk" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/fashionmarketlk" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UCvLt74yueq1sP-_s1qKkTMQ" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" target="_blank" title="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="store.html">Our Store</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="sarees.html">Sarees</a></li>
+                        <li><a href="dresses.html">Dresses</a></li>
+                        <li><a href="tops.html">Tops</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Help</h4>
+                    <ul class="footer-links">
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="delivery.html">Delivery Policy</a></li>
+                        <li><a href="returns.html">Returns & Exchange</a></li>
+                        <li><a href="terms.html">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get special offers and updates.</p>
+                    <form class="newsletter-form">
+                        <div class="newsletter-input">
+                            <input type="email" placeholder="Enter your email" required>
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 FMLK. All Rights Reserved.</p>
+                <div class="payment-icons">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../scripts/api.js"></script>
+    <script src="../scripts/main.js"></script>
+    <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!isLoggedIn()) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            loadUserInfo();
+            loadDashboardData();
+            setupNavigation();
+        });
+
+        function loadUserInfo() {
+            const user = getUserInfo();
+            if (user) {
+                document.getElementById('userName').textContent = user.name;
+                document.getElementById('userEmail').textContent = user.email;
+                document.getElementById('profileName').value = user.name;
+                document.getElementById('profileEmail').value = user.email;
+                
+                // Set user initial
+                const initial = user.name.charAt(0).toUpperCase();
+                document.getElementById('userInitial').innerHTML = initial;
+            }
+        }
+
+        function loadDashboardData() {
+            // Load wishlist count
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            document.getElementById('wishlistCount').textContent = wishlist.length;
+
+            // Load cart count
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cartCount').textContent = cart.length;
+
+            // Load orders (from API if available)
+            loadOrders();
+        }
+
+        async function loadOrders() {
+            try {
+                const response = await apiRequest('/orders', { method: 'GET' });
+                if (response.success && response.data && response.data.length > 0) {
+                    document.getElementById('totalOrders').textContent = response.data.length;
+                    displayOrders(response.data);
+                }
+            } catch (error) {
+                console.log('No orders found');
+            }
+        }
+
+        function displayOrders(orders) {
+            const ordersHtml = `
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Date</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${orders.slice(0, 5).map(order => `
+                            <tr>
+                                <td>#${order._id.slice(-8).toUpperCase()}</td>
+                                <td>${new Date(order.createdAt).toLocaleDateString()}</td>
+                                <td>${order.items.length} items</td>
+                                <td>Rs. ${order.totalPrice.toLocaleString()}</td>
+                                <td><span class="order-status status-${order.status.toLowerCase()}">${order.status}</span></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('recentOrders').innerHTML = ordersHtml;
+            document.getElementById('allOrders').innerHTML = ordersHtml;
+        }
+
+        function setupNavigation() {
+            const navLinks = document.querySelectorAll('.account-nav a');
+            const sections = document.querySelectorAll('.content-section');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Remove active class from all
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+
+                    // Add active class to clicked
+                    link.classList.add('active');
+                    const sectionId = link.dataset.section;
+                    document.getElementById(sectionId).classList.add('active');
+                });
+            });
+
+            // Logout button
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                if (confirm('Are you sure you want to logout?')) {
+                    logoutUser();
+                }
+            });
+
+            // Profile form
+            document.getElementById('profileForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Profile updated successfully!');
+            });
+        }
+    </script>
+</body>
+</html>

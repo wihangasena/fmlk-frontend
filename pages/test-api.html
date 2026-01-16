@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+    <style>
+        .product-card { border: 1px solid #ccc; padding: 10px; margin: 10px; display: inline-block; width: 200px; }
+        .product-card img { width: 100%; height: 200px; object-fit: cover; }
+    </style>
+</head>
+<body>
+    <h1>API Test Page</h1>
+    <div id="output">Loading...</div>
+    <div id="products"></div>
+    
+    <script>
+        const API_BASE_URL = 'http://localhost:5000/api';
+        
+        async function testAPI() {
+            const output = document.getElementById('output');
+            const productsDiv = document.getElementById('products');
+            
+            try {
+                output.innerHTML = 'Fetching from ' + API_BASE_URL + '/products?category=sarees...';
+                
+                const response = await fetch(API_BASE_URL + '/products?category=sarees');
+                const data = await response.json();
+                
+                output.innerHTML = 'Response received! Success: ' + data.success + ', Count: ' + data.count;
+                
+                if (data.success && data.data && data.data.length > 0) {
+                    productsDiv.innerHTML = '<h2>Found ' + data.data.length + ' products:</h2>';
+                    
+                    data.data.forEach(product => {
+                        const card = document.createElement('div');
+                        card.className = 'product-card';
+                        const imgSrc = product.images && product.images[0] ? product.images[0] : 'https://via.placeholder.com/200';
+                        card.innerHTML = `
+                            <img src="${imgSrc}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/200?text=Error'">
+                            <h3>${product.name}</h3>
+                            <p>Price: ${product.price} LKR</p>
+                        `;
+                        productsDiv.appendChild(card);
+                    });
+                } else {
+                    productsDiv.innerHTML = '<p style="color: orange;">No products found in response</p>';
+                }
+            } catch (error) {
+                output.innerHTML = '<p style="color: red;">Error: ' + error.message + '</p>';
+                console.error('Full error:', error);
+            }
+        }
+        
+        testAPI();
+    </script>
+</body>
+</html>

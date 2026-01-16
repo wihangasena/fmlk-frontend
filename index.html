@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FMLK - Fashion Market</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <p><i class="fas fa-truck"></i> Worldwide Delivery & Pickup From Store Options Available</p>
+    </div>
+
+    <!-- Navigation -->
+    <header class="header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="logo-wrapper">
+                <a href="index.html" class="logo">
+                    <img src="https://fmlk.lk/cdn/shop/files/262CF083-1F8B-41AB-A174-2A775BFEB365_300x.png?v=1614309120" alt="FMLK" class="logo-img">
+                </a>
+            </div>
+            
+            <!-- Main Navigation -->
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="pages/sarees.html">Sarees</a></li>
+                    <li><a href="pages/dresses.html">Dresses</a></li>
+                    <li><a href="pages/tops.html">Tops</a></li>
+                    <li><a href="pages/about.html">About</a></li>
+                    <li><a href="pages/contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Utility Icons -->
+            <div class="header-icons">
+                <a href="#" class="icon-btn" title="Search"><i class="fas fa-search"></i></a>
+                <a href="pages/login.html" class="icon-btn" title="Account"><i class="fas fa-user"></i></a>
+                <a href="#" class="icon-btn" title="Wishlist"><i class="fas fa-heart"></i></a>
+                <a href="pages/cart.html" class="icon-btn cart-icon" title="Cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-nav" id="mobileNav">
+            <ul class="mobile-nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pages/sarees.html">Sarees</a></li>
+                <li><a href="pages/dresses.html">Dresses</a></li>
+                <li><a href="pages/tops.html">Tops</a></li>
+                <li><a href="pages/about.html">About</a></li>
+                <li><a href="pages/contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Banner Section -->
+    <section class="hero-banner">
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background: url('banner1.jpg') center/cover no-repeat;">
+                <div class="hero-content">
+                    <span class="hero-tag">New Season</span>
+                    <h1>Discover Your Style</h1>
+                    <p>Explore our latest collection of handcrafted Sri Lankan fashion</p>
+                    <a href="pages/sarees.html" class="btn-hero">Shop Collection <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="hero-slide" style="background: url('images/banners/hero-banner-2.jpg') center/cover no-repeat;">
+                <div class="hero-content">
+                    <span class="hero-tag">Featured</span>
+                    <h1>Elegant Sarees</h1>
+                    <p>Handwoven designs for every special occasion</p>
+                    <a href="pages/sarees.html" class="btn-hero">Explore Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="hero-slide" style="background: url('images/banners/hero-banner-3.jpg') center/cover no-repeat;">
+                <div class="hero-content">
+                    <span class="hero-tag">Trending</span>
+                    <h1>Modern Dresses</h1>
+                    <p>Contemporary styles for the modern woman</p>
+                    <a href="pages/dresses.html" class="btn-hero">View Collection <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+        <button class="hero-nav hero-prev" onclick="changeSlide(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="hero-nav hero-next" onclick="changeSlide(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="hero-dots">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
+    </section>
+
+    <!-- Category Highlight Section -->
+    <section class="category-section">
+        <div class="container">
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>Sarees</h3>
+                    <p>Elegant traditional wear crafted with love and heritage</p>
+                    <a href="pages/sarees.html" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3>Dresses</h3>
+                    <p>Modern & stylish outfits for every occasion</p>
+                    <a href="pages/dresses.html" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-vest"></i>
+                    </div>
+                    <h3>Tops</h3>
+                    <p>Casual everyday wear with unique designs</p>
+                    <a href="pages/tops.html" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Arrivals Section -->
+    <section class="arrivals-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>New Arrivals</h2>
+                <p>Discover the latest additions to our collection</p>
+            </div>
+
+            <!-- Sarees Category -->
+            <div class="product-category category-sarees">
+                <div class="category-header">
+                    <h3><i class="fas fa-gem"></i> Sarees</h3>
+                    <a href="pages/sarees.html" class="view-more">View More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="product-grid" id="sarees-grid">
+                    <p style="text-align: center; grid-column: 1/-1; padding: 20px;">Loading sarees...</p>
+                </div>
+            </div>
+
+            <!-- Dresses Category -->
+            <div class="product-category category-dresses">
+                <div class="category-header">
+                    <h3><i class="fas fa-tshirt"></i> Dresses</h3>
+                    <a href="pages/dresses.html" class="view-more">View More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="product-grid" id="dresses-grid">
+                    <p style="text-align: center; grid-column: 1/-1; padding: 20px;">Loading dresses...</p>
+                </div>
+            </div>
+
+            <!-- Tops Category -->
+            <div class="product-category category-tops">
+                <div class="category-header">
+                    <h3><i class="fas fa-vest"></i> Tops</h3>
+                    <a href="pages/tops.html" class="view-more">View More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="product-grid" id="tops-grid">
+                    <p style="text-align: center; grid-column: 1/-1; padding: 20px;">Loading tops...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog / Featured Content Section -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="blog-grid">
+                <div class="blog-content">
+                    <span class="blog-tag">Fashion</span>
+                    <h2>FMLK Athleisure: Sport Your Style</h2>
+                    <p>This new cool 9 - 5 Athleisure sarees are designed for the woman who's always on the go. Confident, effortlessly stylish, she is unstoppable. Crafted with lightweight, breathable fabrics that move with her, this collection keeps her in style from the first meeting to the last hustle of the day.</p>
+                    <a href="pages/blog.html" class="btn-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="blog-image">
+                    <img src="https://fmlk.lk/cdn/shop/files/A_STAT_OF_ART_2_1_1080x.jpg?v=1689858021" alt="Fashion Blog">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotional Banner Section -->
+    <section class="promo-banner" style="background: url('gr.jpg') center/cover no-repeat;">
+        <div class="promo-overlay"></div>
+        <div class="promo-content">
+            <span class="promo-tag">Limited Time Offer</span>
+            <h2>Seasonal Sale</h2>
+            <p>Up to 30% off on selected items</p>
+            <a href="pages/sarees.html" class="btn-promo">Shop Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="https://fmlk.lk/cdn/shop/files/262CF083-1F8B-41AB-A174-2A775BFEB365_300x.png?v=1614309120" alt="FMLK" class="footer-logo-img">
+                    </div>
+                    <p class="footer-desc">Discover the finest Sri Lankan fashion with FMLK. Quality craftsmanship meets modern style.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/fashionmarketlk" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/fashionmarketlk" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UCvLt74yueq1sP-_s1qKkTMQ" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" target="_blank" title="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="pages/store.html">Our Store</a></li>
+                        <li><a href="pages/about.html">About Us</a></li>
+                        <li><a href="pages/blog.html">Blog</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="pages/sarees.html">Sarees</a></li>
+                        <li><a href="pages/dresses.html">Dresses</a></li>
+                        <li><a href="pages/tops.html">Tops</a></li>
+                        <li><a href="pages/size-guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Help</h4>
+                    <ul class="footer-links">
+                        <li><a href="pages/faqs.html">FAQs</a></li>
+                        <li><a href="pages/delivery.html">Delivery Policy</a></li>
+                        <li><a href="pages/returns.html">Returns & Exchange</a></li>
+                        <li><a href="pages/terms.html">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get special offers and updates.</p>
+                    <form class="newsletter-form">
+                        <div class="newsletter-input">
+                            <input type="email" placeholder="Enter your email" required>
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 FMLK. All Rights Reserved.</p>
+                <div class="payment-icons">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/api.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/homepage.js"></script>
+</body>
+</html>

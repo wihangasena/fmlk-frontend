@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist - FMLK</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .wishlist-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        .wishlist-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .wishlist-header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .wishlist-header p {
+            color: var(--text-light);
+        }
+
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .wishlist-item {
+            background: var(--secondary-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .wishlist-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .wishlist-item-image {
+            aspect-ratio: 2/3;
+            overflow: hidden;
+        }
+
+        .wishlist-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .wishlist-item-info {
+            padding: 20px;
+        }
+
+        .wishlist-item-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .wishlist-item-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .wishlist-item-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-add-to-cart-sm {
+            flex: 1;
+            padding: 12px 15px;
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-add-to-cart-sm:hover {
+            background-color: var(--accent-color);
+        }
+
+        .btn-remove-wishlist {
+            width: 45px;
+            height: 45px;
+            background-color: #fff0f3;
+            color: var(--accent-color);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-remove-wishlist:hover {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+        }
+
+        .empty-wishlist {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .empty-wishlist i {
+            font-size: 80px;
+            color: var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .empty-wishlist h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .empty-wishlist p {
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .btn-continue-shopping {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-continue-shopping:hover {
+            background-color: var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .wishlist-header h1 {
+                font-size: 24px;
+            }
+
+            .wishlist-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .wishlist-item-info {
+                padding: 15px;
+            }
+
+            .wishlist-item-name {
+                font-size: 14px;
+            }
+
+            .wishlist-item-price {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-notice">
+        Worldwide Delivery & Pickup From Store Options Available
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="nav-center">
+                <a href="../index.html" class="logo">
+                    <img src="https://fmlk.lk/cdn/shop/files/262CF083-1F8B-41AB-A174-2A775BFEB365_300x.png?v=1614309120" alt="FMLK" class="logo-img">
+                </a>
+            </div>
+            <div class="nav-right">
+                <a href="#" class="nav-icon" aria-label="Search"><i class="fas fa-search"></i></a>
+                <a href="wishlist.html" class="nav-icon wishlist-icon active" aria-label="Wishlist">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-count" id="wishlistCount">0</span>
+                </a>
+                <a href="login.html" class="nav-icon" aria-label="Login"><i class="fas fa-user"></i></a>
+                <a href="cart.html" class="nav-icon" aria-label="Cart"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </div>
+        <div class="nav-menu" id="navMenu">
+            <a href="../index.html">HOME</a>
+            <a href="sarees.html">SAREES</a>
+            <a href="dresses.html">DRESSES</a>
+            <a href="tops.html">TOPS</a>
+            <a href="about.html">ABOUT US</a>
+            <a href="contact.html">CONTACT US</a>
+        </div>
+    </nav>
+
+    <div class="wishlist-container">
+        <div class="wishlist-header">
+            <h1><i class="fas fa-heart"></i> My Wishlist</h1>
+            <p id="wishlistItemCount">You have 0 items in your wishlist</p>
+        </div>
+
+        <!-- Wishlist Grid -->
+        <div class="wishlist-grid" id="wishlistGrid">
+            <!-- Items will be loaded dynamically -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-wishlist" id="emptyWishlist" style="display: none;">
+            <i class="far fa-heart"></i>
+            <h2>Your wishlist is empty</h2>
+            <p>Save your favorite items here to buy them later</p>
+            <a href="dresses.html" class="btn-continue-shopping">Continue Shopping</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="https://fmlk.lk/cdn/shop/files/262CF083-1F8B-41AB-A174-2A775BFEB365_300x.png?v=1614309120" alt="FMLK" class="footer-logo-img">
+                    </div>
+                    <p class="footer-desc">Discover the finest Sri Lankan fashion with FMLK. Quality craftsmanship meets modern style.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/fashionmarketlk" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/fashionmarketlk" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UCvLt74yueq1sP-_s1qKkTMQ" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" target="_blank" title="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="store.html">Our Store</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="sarees.html">Sarees</a></li>
+                        <li><a href="dresses.html">Dresses</a></li>
+                        <li><a href="tops.html">Tops</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Help</h4>
+                    <ul class="footer-links">
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="delivery.html">Delivery Policy</a></li>
+                        <li><a href="returns.html">Returns & Exchange</a></li>
+                        <li><a href="terms.html">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get special offers and updates.</p>
+                    <form class="newsletter-form">
+                        <div class="newsletter-input">
+                            <input type="email" placeholder="Enter your email" required>
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 FMLK. All Rights Reserved.</p>
+                <div class="payment-icons">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../scripts/main.js"></script>
+    <script>
+        // Load wishlist on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadWishlist();
+        });
+
+        function loadWishlist() {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const grid = document.getElementById('wishlistGrid');
+            const emptyState = document.getElementById('emptyWishlist');
+            const itemCount = document.getElementById('wishlistItemCount');
+            const countBadge = document.getElementById('wishlistCount');
+
+            // Update count
+            countBadge.textContent = wishlist.length;
+            countBadge.style.display = wishlist.length > 0 ? 'flex' : 'none';
+            itemCount.textContent = `You have ${wishlist.length} item${wishlist.length !== 1 ? 's' : ''} in your wishlist`;
+
+            if (wishlist.length === 0) {
+                grid.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            grid.style.display = 'grid';
+            emptyState.style.display = 'none';
+            grid.innerHTML = '';
+
+            wishlist.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'wishlist-item';
+                card.innerHTML = `
+                    <a href="product-detail.html" class="wishlist-item-image">
+                        <img src="${item.image}" alt="${item.name}">
+                    </a>
+                    <div class="wishlist-item-info">
+                        <h3 class="wishlist-item-name">${item.name}</h3>
+                        <p class="wishlist-item-price">${item.price}</p>
+                        <div class="wishlist-item-actions">
+                            <button class="btn-add-to-cart-sm" onclick="addToCartFromWishlist('${item.id}')">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart
+                            </button>
+                            <button class="btn-remove-wishlist" onclick="removeFromWishlist('${item.id}')" title="Remove from wishlist">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function removeFromWishlist(productId) {
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            wishlist = wishlist.filter(item => item.id !== productId);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            loadWishlist();
+        }
+
+        function addToCartFromWishlist(productId) {
+            alert('Added to cart! (Cart functionality coming with backend)');
+            // Future: Add to cart via API
+        }
+    </script>
+</body>
+</html>

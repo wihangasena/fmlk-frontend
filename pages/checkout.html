@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - FMLK</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .checkout-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .checkout-form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        .checkout-form h2 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-section h3 i {
+            color: #667eea;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group label span.required {
+            color: #e53e3e;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 500px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option:hover {
+            border-color: #667eea;
+        }
+
+        .payment-option.selected {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .payment-option input {
+            margin-top: 3px;
+        }
+
+        .payment-option-content h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .payment-option-content p {
+            font-size: 13px;
+            color: #666;
+            margin: 0;
+        }
+
+        .bank-details {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .bank-details.show {
+            display: block;
+        }
+
+        .bank-details h4 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .bank-details p {
+            margin: 8px 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .bank-details strong {
+            color: #333;
+        }
+
+        .bank-details .note {
+            margin-top: 15px;
+            padding: 12px;
+            background: #fef3c7;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #92400e;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .order-summary h2 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .order-items {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .order-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-item-image {
+            width: 70px;
+            height: 90px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .order-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .order-item-details h4 {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .order-item-details p {
+            font-size: 13px;
+            color: #666;
+            margin: 3px 0;
+        }
+
+        .order-item-details .item-price {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            font-size: 15px;
+        }
+
+        .summary-row.total {
+            border-top: 2px solid #eee;
+            margin-top: 10px;
+            padding-top: 15px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .btn-place-order {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn-place-order:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-place-order:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .whatsapp-info {
+            margin-top: 15px;
+            padding: 15px;
+            background: #dcfce7;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+            color: #166534;
+        }
+
+        .whatsapp-info i {
+            color: #25d366;
+            margin-right: 5px;
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-cart-message i {
+            font-size: 60px;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .empty-cart-message h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .empty-cart-message p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* Success Modal */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-modal.active {
+            display: flex;
+        }
+
+        .success-content {
+            background: #fff;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            margin: 20px;
+        }
+
+        .success-content .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #dcfce7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+        }
+
+        .success-content .success-icon i {
+            font-size: 40px;
+            color: #22c55e;
+        }
+
+        .success-content h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .success-content p {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .success-content .order-id {
+            font-size: 18px;
+            font-weight: 600;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        .success-content .btn-continue {
+            display: inline-block;
+            padding: 14px 30px;
+            background: #667eea;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-notice">
+        Worldwide Delivery & Pickup From Store Options Available
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="nav-center">
+                <a href="../index.html" class="logo">
+                    <img src="https://fmlk.lk/cdn/shop/files/262CF083-1F8B-41AB-A174-2A775BFEB365_300x.png?v=1614309120" alt="FMLK" class="logo-img">
+                </a>
+            </div>
+            <div class="nav-right">
+                <a href="#" class="nav-icon" aria-label="Search"><i class="fas fa-search"></i></a>
+                <a href="login.html" class="nav-icon" aria-label="Login"><i class="fas fa-user"></i></a>
+                <a href="cart.html" class="nav-icon" aria-label="Cart"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </div>
+        <div class="nav-menu" id="navMenu">
+            <a href="../index.html">HOME</a>
+            <a href="sarees.html">SAREES</a>
+            <a href="dresses.html">DRESSES</a>
+            <a href="tops.html">TOPS</a>
+            <a href="about.html">ABOUT US</a>
+            <a href="contact.html">CONTACT US</a>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <h1>CHECKOUT</h1>
+        <p>Complete your order</p>
+    </section>
+
+    <div class="checkout-container" id="checkoutContent">
+        <!-- Left: Form -->
+        <div class="checkout-form">
+            <h2><i class="fas fa-truck"></i> Shipping Information</h2>
+            
+            <form id="checkoutForm">
+                <!-- Contact Information -->
+                <div class="form-section">
+                    <h3><i class="fas fa-user"></i> Contact Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name <span class="required">*</span></label>
+                            <input type="text" id="customerName" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="customerEmail" placeholder="your@email.com">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="customerPhone" placeholder="07X XXX XXXX" required>
+                        </div>
+                        <div class="form-group">
+                            <label>WhatsApp Number <span class="required">*</span></label>
+                            <input type="tel" id="customerWhatsapp" placeholder="07X XXX XXXX" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping Address -->
+                <div class="form-section">
+                    <h3><i class="fas fa-map-marker-alt"></i> Delivery Address</h3>
+                    <div class="form-group">
+                        <label>Street Address <span class="required">*</span></label>
+                        <input type="text" id="addressStreet" placeholder="House number, Street name" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>City <span class="required">*</span></label>
+                            <input type="text" id="addressCity" placeholder="City" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Province <span class="required">*</span></label>
+                            <select id="addressState" required>
+                                <option value="">Select Province</option>
+                                <option value="Western">Western</option>
+                                <option value="Central">Central</option>
+                                <option value="Southern">Southern</option>
+                                <option value="Northern">Northern</option>
+                                <option value="Eastern">Eastern</option>
+                                <option value="North Western">North Western</option>
+                                <option value="North Central">North Central</option>
+                                <option value="Uva">Uva</option>
+                                <option value="Sabaragamuwa">Sabaragamuwa</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Postal Code <span class="required">*</span></label>
+                        <input type="text" id="addressZip" placeholder="Postal Code" required>
+                    </div>
+                </div>
+
+                <!-- Payment Method -->
+                <div class="form-section">
+                    <h3><i class="fas fa-credit-card"></i> Payment Method</h3>
+                    <div class="payment-options">
+                        <label class="payment-option selected" onclick="selectPayment('bank_transfer')">
+                            <input type="radio" name="paymentMethod" value="bank_transfer" checked>
+                            <div class="payment-option-content">
+                                <h4><i class="fas fa-university"></i> Bank Transfer</h4>
+                                <p>Transfer to our bank account and share receipt via WhatsApp</p>
+                            </div>
+                        </label>
+                        <label class="payment-option" onclick="selectPayment('cash_on_delivery')">
+                            <input type="radio" name="paymentMethod" value="cash_on_delivery">
+                            <div class="payment-option-content">
+                                <h4><i class="fas fa-money-bill-wave"></i> Cash on Delivery</h4>
+                                <p>Pay when you receive your order</p>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="bank-details show" id="bankDetails">
+                        <h4><i class="fas fa-info-circle"></i> Bank Account Details</h4>
+                        <p><strong>Bank:</strong> Commercial Bank of Ceylon</p>
+                        <p><strong>Account Name:</strong> FMLK Fashion</p>
+                        <p><strong>Account Number:</strong> 1234567890</p>
+                        <p><strong>Branch:</strong> Colombo</p>
+                        <div class="note">
+                            <i class="fas fa-whatsapp"></i> After making the transfer, please send the payment receipt to our WhatsApp: <strong>+94 77 123 4567</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Notes -->
+                <div class="form-section">
+                    <h3><i class="fas fa-comment"></i> Order Notes (Optional)</h3>
+                    <div class="form-group">
+                        <textarea id="orderNotes" rows="3" placeholder="Any special instructions for your order..."></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Right: Order Summary -->
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <div class="order-items" id="orderItems">
+                <!-- Items will be loaded here -->
+            </div>
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="subtotal">0 LKR</span>
+            </div>
+            <div class="summary-row">
+                <span>Shipping</span>
+                <span id="shipping">Free</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total</span>
+                <span id="total">0 LKR</span>
+            </div>
+            <button class="btn-place-order" id="placeOrderBtn" onclick="placeOrder()">
+                <i class="fas fa-lock"></i> Place Order
+            </button>
+            <div class="whatsapp-info">
+                <i class="fab fa-whatsapp"></i> We'll contact you via WhatsApp to confirm your order
+            </div>
+        </div>
+    </div>
+
+    <!-- Empty Cart Message -->
+    <div class="empty-cart-message" id="emptyCartMessage" style="display: none;">
+        <i class="fas fa-shopping-cart"></i>
+        <h2>Your cart is empty</h2>
+        <p>Add some items to your cart before checking out</p>
+        <a href="../index.html" class="btn-place-order" style="display: inline-block; width: auto; text-decoration: none;">Continue Shopping</a>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2>Order Placed Successfully!</h2>
+            <p>Thank you for your order.</p>
+            <div class="order-id" id="orderIdDisplay">Order #</div>
+            <p>We will contact you via WhatsApp to confirm your order and payment details.</p>
+            <a href="../index.html" class="btn-continue">Continue Shopping</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="https://fmlk.lk/cdn/shop/files/262CF083-1F8B-41AB-A174-2A775BFEB365_300x.png?v=1614309120" alt="FMLK" class="footer-logo-img">
+                    </div>
+                    <p class="footer-desc">Discover the finest Sri Lankan fashion with FMLK. Quality craftsmanship meets modern style.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/fashionmarketlk" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/fashionmarketlk" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UCvLt74yueq1sP-_s1qKkTMQ" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" target="_blank" title="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="store.html">Our Store</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="sarees.html">Sarees</a></li>
+                        <li><a href="dresses.html">Dresses</a></li>
+                        <li><a href="tops.html">Tops</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Help</h4>
+                    <ul class="footer-links">
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="delivery.html">Delivery Policy</a></li>
+                        <li><a href="returns.html">Returns & Exchange</a></li>
+                        <li><a href="terms.html">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get special offers and updates.</p>
+                    <form class="newsletter-form">
+                        <div class="newsletter-input">
+                            <input type="email" placeholder="Enter your email" required>
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 FMLK. All Rights Reserved.</p>
+                <div class="payment-icons">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../scripts/main.js"></script>
+    <script>
+        const API_BASE_URL = 'http://localhost:5000/api';
+        let cartItems = [];
+
+        // Load cart on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCart();
+        });
+
+        function loadCart() {
+            cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            if (cartItems.length === 0) {
+                document.getElementById('checkoutContent').style.display = 'none';
+                document.getElementById('emptyCartMessage').style.display = 'block';
+                return;
+            }
+
+            displayOrderItems();
+            updateTotals();
+        }
+
+        function displayOrderItems() {
+            const container = document.getElementById('orderItems');
+            
+            container.innerHTML = cartItems.map(item => `
+                <div class="order-item">
+                    <div class="order-item-image">
+                        <img src="${item.image || 'https://via.placeholder.com/70x90'}" alt="${item.name}">
+                    </div>
+                    <div class="order-item-details">
+                        <h4>${item.name}</h4>
+                        <p>Size: ${item.size || 'N/A'}</p>
+                        <p>Qty: ${item.quantity}</p>
+                        <p class="item-price">${(item.price * item.quantity).toLocaleString()} LKR</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateTotals() {
+            const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal >= 10000 ? 0 : 350; // Free shipping over 10,000 LKR
+            const total = subtotal + shipping;
+
+            document.getElementById('subtotal').textContent = `${subtotal.toLocaleString()} LKR`;
+            document.getElementById('shipping').textContent = shipping === 0 ? 'Free' : `${shipping.toLocaleString()} LKR`;
+            document.getElementById('total').textContent = `${total.toLocaleString()} LKR`;
+        }
+
+        function selectPayment(method) {
+            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelector(`input[value="${method}"]`).closest('.payment-option').classList.add('selected');
+            
+            const bankDetails = document.getElementById('bankDetails');
+            if (method === 'bank_transfer') {
+                bankDetails.classList.add('show');
+            } else {
+                bankDetails.classList.remove('show');
+            }
+        }
+
+        async function placeOrder() {
+            // Validate form
+            const form = document.getElementById('checkoutForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const btn = document.getElementById('placeOrderBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+
+            try {
+                // Get form values
+                const customerInfo = {
+                    name: document.getElementById('customerName').value,
+                    email: document.getElementById('customerEmail').value,
+                    phone: document.getElementById('customerPhone').value,
+                    whatsapp: document.getElementById('customerWhatsapp').value,
+                };
+
+                const shippingAddress = {
+                    street: document.getElementById('addressStreet').value,
+                    city: document.getElementById('addressCity').value,
+                    state: document.getElementById('addressState').value,
+                    zipCode: document.getElementById('addressZip').value,
+                    country: 'Sri Lanka',
+                };
+
+                const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+                const paymentNote = document.getElementById('orderNotes').value;
+
+                // Calculate totals
+                const itemsPrice = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const shippingPrice = itemsPrice >= 10000 ? 0 : 350;
+                const totalPrice = itemsPrice + shippingPrice;
+
+                // Prepare order items
+                const orderItems = cartItems.map(item => ({
+                    product: item.productId,
+                    name: item.name,
+                    quantity: item.quantity,
+                    size: item.size || 'Free Size',
+                    price: item.price,
+                }));
+
+                // Send order to API
+                const response = await fetch(`${API_BASE_URL}/orders/guest`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        customerInfo,
+                        orderItems,
+                        shippingAddress,
+                        paymentMethod,
+                        paymentNote,
+                        itemsPrice,
+                        shippingPrice,
+                        totalPrice,
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Clear cart
+                    localStorage.removeItem('cart');
+                    
+                    // Show success modal
+                    document.getElementById('orderIdDisplay').textContent = `Order #${data.data._id.slice(-8).toUpperCase()}`;
+                    document.getElementById('successModal').classList.add('active');
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Order error:', error);
+                alert('Error placing order. Please try again or contact us via WhatsApp.');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-lock"></i> Place Order';
+            }
+        }
+
+        // Copy WhatsApp number feature
+        document.querySelectorAll('.whatsapp-info').forEach(el => {
+            el.style.cursor = 'pointer';
+            el.addEventListener('click', () => {
+                window.open('https://wa.me/94771234567', '_blank');
+            });
+        });
+    </script>
+</body>
+</html>

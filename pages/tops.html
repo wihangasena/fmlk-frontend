@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tops - FMLK</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="header-notice">
+        Worldwide Delivery & Pickup From Store Options Available
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="nav-center">
+                <a href="../index.html" class="logo">
+                    <img src="https://fmlk.lk/cdn/shop/files/262CF083-1F8B-41AB-A174-2A775BFEB365_300x.png?v=1614309120" alt="FMLK" class="logo-img">
+                </a>
+            </div>
+            <div class="nav-right">
+                <a href="#" class="nav-icon" aria-label="Search"><i class="fas fa-search"></i></a>
+                <a href="wishlist.html" class="nav-icon wishlist-icon" aria-label="Wishlist">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-count" id="wishlistCount">0</span>
+                </a>
+                <a href="login.html" class="nav-icon" aria-label="Login"><i class="fas fa-user"></i></a>
+                <a href="cart.html" class="nav-icon" aria-label="Cart"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </div>
+        <div class="nav-menu" id="navMenu">
+            <a href="../index.html">HOME</a>
+            <a href="sarees.html">SAREES</a>
+            <a href="dresses.html">DRESSES</a>
+            <a href="tops.html" class="active">TOPS</a>
+            <a href="about.html">ABOUT US</a>
+            <a href="contact.html">CONTACT US</a>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <h1>TOPS</h1>
+        <p>Stylish tops for every occasion</p>
+    </section>
+
+    <section class="product-layout">
+        <!-- Filter Sidebar -->
+        <aside class="filter-sidebar" id="filterSidebar">
+            <div class="filter-header">
+                <h3><i class="fas fa-sliders-h"></i> Filters</h3>
+                <button class="close-filter-btn" id="closeFilterBtn" aria-label="Close filters">
+                    <i class="fas fa-times"></i>
+                </button>
+                <button class="clear-filters-btn" id="clearAllFilters">Clear All</button>
+            </div>
+
+            <!-- Active Filters -->
+            <div class="active-filters" id="activeFilters"></div>
+
+            <!-- Sort By -->
+            <div class="filter-group">
+                <div class="filter-group-header">
+                    <h4>Sort By</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="filter-group-content">
+                    <select class="sort-select" id="sortSelect">
+                        <option value="default">Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="newest">Newest Arrivals</option>
+                        <option value="name-az">Name: A to Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Price Range -->
+            <div class="filter-group">
+                <div class="filter-group-header">
+                    <h4>Price Range</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="filter-group-content">
+                    <div class="price-options">
+                        <div class="price-option">
+                            <input type="radio" name="price" id="price-all" value="all" checked>
+                            <label for="price-all">All Prices</label>
+                        </div>
+                        <div class="price-option">
+                            <input type="radio" name="price" id="price-under-7k" value="0-7000">
+                            <label for="price-under-7k">Under 7,000 LKR</label>
+                        </div>
+                        <div class="price-option">
+                            <input type="radio" name="price" id="price-7k-10k" value="7000-10000">
+                            <label for="price-7k-10k">7,000 - 10,000 LKR</label>
+                        </div>
+                        <div class="price-option">
+                            <input type="radio" name="price" id="price-10k-15k" value="10000-15000">
+                            <label for="price-10k-15k">10,000 - 15,000 LKR</label>
+                        </div>
+                        <div class="price-option">
+                            <input type="radio" name="price" id="price-above-15k" value="15000-999999">
+                            <label for="price-above-15k">Above 15,000 LKR</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Style -->
+            <div class="filter-group">
+                <div class="filter-group-header">
+                    <h4>Style</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="filter-group-content">
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="style-casual" value="casual" data-filter="style">
+                            <label for="style-casual">Casual</label>
+                            <span class="count">4</span>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="style-formal" value="formal" data-filter="style">
+                            <label for="style-formal">Formal</label>
+                            <span class="count">1</span>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="style-party" value="party" data-filter="style">
+                            <label for="style-party">Party</label>
+                            <span class="count">1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sleeve Type -->
+            <div class="filter-group">
+                <div class="filter-group-header">
+                    <h4>Sleeve</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="filter-group-content">
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sleeve-sleeveless" value="sleeveless" data-filter="sleeve">
+                            <label for="sleeve-sleeveless">Sleeveless</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sleeve-short" value="short" data-filter="sleeve">
+                            <label for="sleeve-short">Short Sleeve</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sleeve-long" value="long" data-filter="sleeve">
+                            <label for="sleeve-long">Long Sleeve</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Size -->
+            <div class="filter-group">
+                <div class="filter-group-header">
+                    <h4>Size</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="filter-group-content">
+                    <div class="size-options">
+                        <button class="size-btn" data-size="xs">XS</button>
+                        <button class="size-btn" data-size="s">S</button>
+                        <button class="size-btn" data-size="m">M</button>
+                        <button class="size-btn" data-size="l">L</button>
+                        <button class="size-btn" data-size="xl">XL</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color -->
+            <div class="filter-group">
+                <div class="filter-group-header">
+                    <h4>Color</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="filter-group-content">
+                    <div class="color-options">
+                        <button class="color-swatch color-grey" data-color="grey" title="Grey" aria-label="Grey"></button>
+                        <button class="color-swatch color-blue" data-color="blue" title="Blue" aria-label="Blue"></button>
+                        <button class="color-swatch color-black" data-color="black" title="Black" aria-label="Black"></button>
+                        <button class="color-swatch color-white" data-color="white" title="White" aria-label="White"></button>
+                        <button class="color-swatch color-pink" data-color="pink" title="Pink" aria-label="Pink"></button>
+                        <button class="color-swatch color-brown" data-color="brown" title="Brown" aria-label="Brown"></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Availability -->
+            <div class="filter-group">
+                <div class="filter-group-header">
+                    <h4>Availability</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="filter-group-content">
+                    <div class="availability-toggle">
+                        <label>In Stock Only</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="inStockOnly" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Filter Overlay for Mobile -->
+        <div class="filter-overlay" id="filterOverlay"></div>
+
+        <!-- Product Content -->
+        <div class="product-content">
+            <!-- Results Header -->
+            <div class="results-header">
+                <p class="results-count">Showing <strong id="productCount">6</strong> products</p>
+                <div class="view-options">
+                    <button class="mobile-filter-btn" id="mobileFilterBtn">
+                        <i class="fas fa-filter"></i> Filters
+                    </button>
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid" aria-label="Grid view">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-btn" data-view="list" aria-label="List view">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="product-grid" id="productGrid">
+                <!-- Products will be loaded dynamically from API -->
+                <p style="text-align: center; grid-column: 1/-1; padding: 40px;">Loading products...</p>
+            </div>
+
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No products found</h3>
+                <p>Try adjusting your filters to find what you're looking for.</p>
+                <button class="btn-secondary" onclick="clearAllFilters()">Clear All Filters</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="https://fmlk.lk/cdn/shop/files/262CF083-1F8B-41AB-A174-2A775BFEB365_300x.png?v=1614309120" alt="FMLK" class="footer-logo-img">
+                    </div>
+                    <p class="footer-desc">Discover the finest Sri Lankan fashion with FMLK. Quality craftsmanship meets modern style.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/fashionmarketlk" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/fashionmarketlk" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UCvLt74yueq1sP-_s1qKkTMQ" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" target="_blank" title="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="store.html">Our Store</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="sarees.html">Sarees</a></li>
+                        <li><a href="dresses.html">Dresses</a></li>
+                        <li><a href="tops.html">Tops</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Help</h4>
+                    <ul class="footer-links">
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="delivery.html">Delivery Policy</a></li>
+                        <li><a href="returns.html">Returns & Exchange</a></li>
+                        <li><a href="terms.html">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get special offers and updates.</p>
+                    <form class="newsletter-form">
+                        <div class="newsletter-input">
+                            <input type="email" placeholder="Enter your email" required>
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 FMLK. All Rights Reserved.</p>
+                <div class="payment-icons">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../scripts/api.js"></script>
+    <script src="../scripts/main.js"></script>
+    <script>
+        // Load products on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadCategoryProducts('tops');
+            updateWishlistCount();
+        });
+
+        // Load products by category from API
+        async function loadCategoryProducts(category) {
+            const productGrid = document.getElementById('productGrid');
+            if (!productGrid) return;
+
+            try {
+                const response = await getProducts({ category: category });
+                
+                if (response.success && response.data && response.data.length > 0) {
+                    productGrid.innerHTML = '';
+                    response.data.forEach(product => {
+                        productGrid.appendChild(createCategoryProductCard(product));
+                    });
+                    document.getElementById('productCount').textContent = response.data.length;
+                } else {
+                    productGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 40px;">No products found in this category.</p>';
+                    document.getElementById('productCount').textContent = '0';
+                }
+            } catch (error) {
+                console.error('Error loading products:', error);
+                productGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: red; padding: 40px;">Error loading products. Make sure backend server is running!</p>';
+            }
+        }
+
+        // Create product card for category page
+        function createCategoryProductCard(product) {
+            const card = document.createElement('a');
+            card.href = `product-detail.html?id=${product._id}`;
+            card.className = 'product-card';
+            card.dataset.category = product.subcategory || '';
+            card.dataset.price = product.price;
+            card.dataset.color = product.colors ? product.colors.join(',').toLowerCase() : '';
+            card.dataset.size = product.sizes ? product.sizes.join(',').toLowerCase() : '';
+            card.dataset.stock = product.stock > 0 ? 'true' : 'false';
+            
+            const imageSrc = (product.images && product.images.length > 0 && product.images[0]) 
+                ? product.images[0] 
+                : 'https://via.placeholder.com/300x400?text=No+Image';
+            
+            const priceFormatted = typeof product.price === 'number' 
+                ? product.price.toLocaleString() 
+                : product.price;
+            
+            card.innerHTML = `
+                <div class="product-image">
+                    <img src="${imageSrc}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300x400?text=Image+Not+Found'">
+                    <div class="product-overlay">
+                        <span class="quick-view">Quick View</span>
+                    </div>
+                    ${product.stock === 0 ? '<span class="badge out-of-stock">Out of Stock</span>' : ''}
+                    ${product.featured ? '<span class="badge featured">Featured</span>' : ''}
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">${product.name}</h3>
+                    <p class="product-price">${priceFormatted} LKR</p>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Update wishlist count
+        function updateWishlistCount() {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const countBadge = document.getElementById('wishlistCount');
+            if (countBadge) {
+                countBadge.textContent = wishlist.length;
+                countBadge.style.display = wishlist.length > 0 ? 'flex' : 'none';
+            }
+        }
+    </script>
+</body>
+</html>
