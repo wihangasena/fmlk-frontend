@@ -91,4 +91,7 @@ function updateWishlistCount() {
 // Update wishlist count on page load
 document.addEventListener('DOMContentLoaded', function() {
     updateWishlistCount();
+    if (typeof updateCartCount === 'function') {
+        updateCartCount();
+    }
 });

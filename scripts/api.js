@@ -265,12 +265,11 @@ function calculateLocalCartTotal() {
 // Update cart count in UI
 function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const countElement = document.querySelector('.cart-count');
-    if (countElement) {
-        const count = cart.length;
-        countElement.textContent = count;
-        countElement.style.display = count > 0 ? 'flex' : 'none';
-    }
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.querySelectorAll('.cart-count').forEach(el => {
+        el.textContent = count;
+        el.style.display = count > 0 ? 'flex' : 'none';
+    });
 }
 
 // Update wishlist count in UI
