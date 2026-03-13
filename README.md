@@ -4,7 +4,7 @@ A fully responsive e-commerce website clone of fmlk.lk, featuring a modern desig
 
 ## 📋 Overview
 
-This is a complete static website clone that includes all major pages and functionality of the original FMLK fashion website. The site showcases sarees, dresses, tops, and other fashion items with a clean, professional design.
+This is a complete static website clone that includes all major pages and functionality of the original FMLK fashion website. The site showcases sarees, dresses, tops, and other fashion items with a clean, professional design
 
 ## 🌟 Features
 
