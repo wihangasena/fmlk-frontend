@@ -18,7 +18,7 @@ This is a complete static website clone that includes all major pages and functi
 - **Multiple Pages**:
   - Home page with featured products
   - Category pages (Sarees, Dresses, Tops)
-  - Product detail page
+  - Product detail pages
   - About Us
   - Contact Us with form
   - Shopping Cart
