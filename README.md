@@ -1,6 +1,6 @@
 # FMLK - Fashion Market LK Website Clone
 
-A fully responsive e-commerce website clone of fmlk.lk, featuring a modern design for a Sri Lankan fashion retailer.
+A fully responsive e-commerce website clone of fmlk.lk, featuring a modern design for a Sri Lankan fashion retaler
 
 ## 📋 Overview
 
