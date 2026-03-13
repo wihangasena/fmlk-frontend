@@ -8,7 +8,7 @@ This is a complete static website clone that includes all major pages and functi
 
 ## 🌟 Features
 
-- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile device
 - **Product Categories**: Sarees, Dresses, and Tops collections
 - **Interactive Elements**: 
   - Hero slider with automatic rotation
