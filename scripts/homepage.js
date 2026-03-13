@@ -153,23 +153,10 @@ function buyNowFromHome(productId, productName, price, image) {
 function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    
-    // Try to update cart count badge if exists
-    const cartIcon = document.querySelector('.nav-icon[aria-label="Cart"]');
-    if (cartIcon) {
-        let badge = cartIcon.querySelector('.cart-count');
-        if (!badge && totalItems > 0) {
-            badge = document.createElement('span');
-            badge.className = 'cart-count';
-            badge.style.cssText = 'position: absolute; top: -5px; right: -5px; background: #e53e3e; color: white; font-size: 10px; padding: 2px 6px; border-radius: 50%;';
-            cartIcon.style.position = 'relative';
-            cartIcon.appendChild(badge);
-        }
-        if (badge) {
-            badge.textContent = totalItems;
-            badge.style.display = totalItems > 0 ? 'block' : 'none';
-        }
-    }
+    document.querySelectorAll('.cart-count').forEach(badge => {
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'flex' : 'none';
+    });
 }
 
 // Generate Star Rating
